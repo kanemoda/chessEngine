@@ -6,32 +6,56 @@ typedef unsigned long long uint64;
 #define NAME "Engin 1.0"
 #define BRD_SQ_NUM 120
 
-enum { EMPTY, wP, wN, wB, wR, wQ, wK, bP, bN, bB, bR, bQ, bK };
+#define MAX_GAME_MOVES 2048
 
-enum {
-  FILA_A,
-  FILE_B,
-  FILE_C,
-  FILE_D,
-  FILE_E,
-  FILE_F,
-  FILE_G,
-  FILE_H,
-  FILE_NONE
-};
-enum {
-  RANK_1,
-  RANK_2,
-  RANK_3,
-  RANK_4,
-  RANK_5,
-  RANK_6,
-  RANK_7,
-  RANK_8,
-  RANK_NONE
+enum
+{
+    EMPTY,
+    wP,
+    wN,
+    wB,
+    wR,
+    wQ,
+    wK,
+    bP,
+    bN,
+    bB,
+    bR,
+    bQ,
+    bK
 };
 
-enum { WHITE, BLACK, BOTH };
+enum
+{
+    FILE_A,
+    FILE_B,
+    FILE_C,
+    FILE_D,
+    FILE_E,
+    FILE_F,
+    FILE_G,
+    FILE_H,
+    FILE_NONE
+};
+enum
+{
+    RANK_1,
+    RANK_2,
+    RANK_3,
+    RANK_4,
+    RANK_5,
+    RANK_6,
+    RANK_7,
+    RANK_8,
+    RANK_NONE
+};
+
+enum
+{
+    WHITE,
+    BLACK,
+    BOTH
+};
 
 // clang-format off
 enum {
@@ -46,6 +70,62 @@ enum {
 };
 // clang-format on
 
-enum { FALSE, TRUE };
+enum
+{
+    FALSE,
+    TRUE
+};
+
+enum
+{
+    WKCA = 1,
+    WQCA = 2,
+    BKCA = 4,
+    BQCA = 8
+};
+
+typedef struct
+{
+    int move;
+    int castlePerm;
+    int enPas;
+    int fiftyMove;
+    uint64 posKey;
+} S_UNDO;
+
+typedef struct
+{
+    int pieces[BRD_SQ_NUM];
+    uint64 pawns[3];
+
+    int kingsq[2];
+    int side;
+    int enPas;
+    int fiftyMove;
+    int ply;
+    int histPly;
+
+    int castlePerm;
+
+    uint64 posKey;
+    int pceNum[13];
+    int bigPce[3];
+    int majPce[3];
+    int minPce[3];
+
+    S_UNDO history[MAX_GAME_MOVES];
+
+} S_BOARD;
+
+/*  MACROS  */
+#define FR2SQ(f, r) ((21 + f) + (r * 10))
+/*  GLOBALS  */
+extern int Sq120ToSq64[BRD_SQ_NUM];
+extern int Sq64ToSq120[64];
+/*  FUNCTIONS   */
+
+extern void AllInit();
+
+// init.c
 
 #endif
