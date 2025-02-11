@@ -1,2 +1,2 @@
 all:
-	gcc engin.c init.c -o engin
+	gcc engin.c init.c bitboard.c -o engin
