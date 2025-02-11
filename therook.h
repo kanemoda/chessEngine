@@ -163,6 +163,8 @@ typedef struct
 /*  MACROS  */
 #define FR2SQ(f, r) ((21 + f) + (r * 10))
 #define SQ64(sq120) Sq120ToSq64[sq120]
+#define POP(b) PopBit(b)
+#define CNT(b) CountBits(b)
 /*  GLOBALS  */
 extern int Sq120ToSq64[BRD_SQ_NUM];
 extern int Sq64ToSq120[64];
@@ -173,5 +175,7 @@ extern void AllInit();
 
 // bitboard.c
 extern void printBitBoard(uint64 bb);
+extern int PopBit(uint64 *bb);
+extern int CountBits(uint64 b);
 
 #endif
