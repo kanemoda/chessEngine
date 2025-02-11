@@ -1,6 +1,46 @@
 #ifndef THEROOK_H
 #define THEROOK_H
 
+#include <stdlib.h>
+#include <stdio.h>
+
+/*
+// clang-format off
+#define DEBUG
+#ifndef DEBUG
+#define ASSERT(n)
+#else
+#define ASSERT(n) \
+if(!(n)) {   \
+printf("%s - Failed",#n);   \
+printf("On %s ",__DATE__);  \
+printf("At %s ",__TIME__);  \
+printf("In File %s ",__FILE);  \
+printf("At Line %d\n",__LINE__);  \
+exit(1);   \
+}
+#endif
+// clang-format on
+*/
+
+// clang-format off
+#define DEBUG
+#ifdef DEBUG
+#define ASSERT(n) do { \
+    if (!(n)) { \
+        printf("%s - Failed\n", #n); \
+        printf("On %s ", __DATE__); \
+        printf("At %s ", __TIME__); \
+        printf("In File %s ", __FILE__); \
+        printf("At Line %d\n", __LINE__); \
+        exit(1); \
+    } \
+} while (0)
+#else
+#define ASSERT(n) ((void)0)
+#endif
+// clang-format on
+
 typedef unsigned long long uint64;
 
 #define NAME "Engin 1.0"
@@ -114,6 +154,9 @@ typedef struct
     int minPce[3];
 
     S_UNDO history[MAX_GAME_MOVES];
+
+    // piece list
+    int pList[13][10];
 
 } S_BOARD;
 
